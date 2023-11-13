@@ -7,7 +7,14 @@ int main()
 
     while (std::getline(std::cin, line))
     {
-        std::cout << line << std::endl;
+        if (!line.empty())
+        {
+            std::cout << line << std::endl;
+        }
+        else
+        {
+            std::cout << "empty input" << std::endl;
+        }
     }
 
     return 0;

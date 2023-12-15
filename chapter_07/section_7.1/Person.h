@@ -2,13 +2,13 @@
 #define PERSON_H
 
 #include <string>
+#include <iostream>
 
-class Person
+struct Person
 {
     std::string _name;
     std::string _address;
 
-public:
     std::string name() const 
     {
         return _name;
@@ -20,5 +20,16 @@ public:
     } 
 };
 
+std::istream& read(std::istream& is, Person& person)
+{
+    is >> person._name >> person._adress;
+    return is;
+}
+
+std::ostream& print(std::ostream& os, const Person& person)
+{
+    os << person.name() << " " << person.address() << std::endl;
+    return os;
+}
 
 #endif

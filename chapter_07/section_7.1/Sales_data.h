@@ -11,12 +11,13 @@ struct Sales_data
 {
     
     //Sales_data() = default;
-    Sales_data()
+    Sales_data(): book_no(""), units_sold(0), revenue(0.0) {}
+    /*Sales_data()
     {
         book_no = "";
         units_sold = 0;
         revenue = 0.0;
-    };
+    };*/
     Sales_data(const std::string& s): book_no(s) {}
     Sales_data(const std::string& s, unsigned n, double p):
                 book_no(s), units_sold(n), revenue(p * n) {}

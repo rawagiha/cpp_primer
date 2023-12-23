@@ -3,9 +3,11 @@
 
 #include <string>
 #include <iostream>
+#include "Window.h"
 
 class Screen
 {
+    friend class Window_mgr;
 public:
     typedef std::string::size_type pos;
     Screen() = default;

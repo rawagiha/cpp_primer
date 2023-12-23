@@ -1,9 +1,20 @@
 #ifndef SCREEN_H
-#define SCREEN_N
+#define SCREEN_H
 
 #include <string>
+#include <vector>
 #include <iostream>
-#include "Window.h"
+
+class Screen;
+
+class Window_mgr
+{
+public:
+    using screen_index = std::vector<Screen>::size_type;
+    void clear(screen_index);
+private:
+    std::vector<Screen> screens;
+};
 
 class Screen
 {
@@ -73,6 +84,12 @@ char Screen::get(pos r, pos c) const
 void Screen::some_member() const
 {
     ++access_ctr;
+}
+
+void Window_mgr::clear(screen_index i)
+{
+    Screen& s = screens[i];
+    s.contents = std::string(s.height * s.width, ' ');
 }
 
 #endif

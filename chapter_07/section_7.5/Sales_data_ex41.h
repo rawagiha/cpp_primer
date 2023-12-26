@@ -11,12 +11,20 @@ friend std::istream& read(std::istream&, Sales_data&);
 friend std::ostream& print(std::ostream&, const Sales_data&);
 
 public:
-    Sales_data() = default;
-    explicit Sales_data(const std::string& s): book_no(s) {}
     Sales_data(const std::string& s, unsigned n, double p):
-                book_no(s), units_sold(n), revenue(p * n) {}
-    //ex7.38 Sales_data(std::istream& is = std::cin);
-    explicit Sales_data(std::istream& is);
+                book_no(s), units_sold(n), revenue(p * n) 
+    {
+        std::cout << "three-arg constructor executed" << std::endl;
+    }
+    Sales_data(): Sales_data("", 0, 0.0) 
+    {
+        std::cout << "default constructor executed" << std::endl;
+    } 
+    Sales_data(const std::string& s): Sales_data(s, 0, 0.0) 
+    {
+        std::cout << "string constructor executed" << std::endl;
+    }
+    Sales_data(std::istream& is);
 
     std::string isbn() const { return book_no; }
     Sales_data& combine(const Sales_data&);
@@ -52,7 +60,11 @@ Sales_data add(const Sales_data &lhs, const Sales_data &rhs)
     return sum;
 }
 
-Sales_data::Sales_data(std::istream& is) { read(is, *this); }
+Sales_data::Sales_data(std::istream& is) : Sales_data() 
+{ 
+    read(is, *this); 
+    std::cout << "istream constructor executed" << std::endl;
+}
 
 Sales_data& Sales_data::combine(const Sales_data &rhs)
 {

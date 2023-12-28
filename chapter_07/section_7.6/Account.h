@@ -21,6 +21,8 @@ public:
         interest_rate = new_rate;
     }
     
+    // static member is not a part of individual obj
+    //Account() { interest_rate = init_rate(); }
 private:
     std::string owner;
     double amount;
@@ -33,6 +35,8 @@ private:
     }
 };
 
+// define and initialize static member outside the class body
+// "interest_rate" is private, but accessible, 
 double Account::interest_rate = init_rate();
 
 #endif

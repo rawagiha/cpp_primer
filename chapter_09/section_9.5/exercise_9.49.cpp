@@ -27,6 +27,13 @@ int main(int argc, char *argv[])
             }   
         }    
     }
+    else
+    {
+        std::cout << "failed to open " << argv[1] << std::endl;
+        return -1;
+    }
     
     std::cout << word << std::endl;  
+    
+    return 0;
 }

@@ -9,6 +9,8 @@ int main(int argc, char *argv[])
  if (argc != 4) return -1;
 
     std::ifstream ifs(argv[1]);
+    
+    // constructor of the std::ofstream automatically opens the file
     std::ofstream ofs_odd(argv[2]), ofs_even(argv[3]);
 
     std::istream_iterator<int> in(ifs), in_eof;
@@ -26,5 +28,8 @@ int main(int argc, char *argv[])
         }
     }
     
+    ofs_odd.flush();
+    ofs_odd << "\n";
+
     return 0;
 }

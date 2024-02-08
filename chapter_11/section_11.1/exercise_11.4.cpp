@@ -9,8 +9,6 @@ void unify(std::string& word)
     {
         ch = std::tolower(ch);
     }
-
-
 }
 
 int main()
@@ -19,11 +17,12 @@ int main()
     std::string word;
 
     while (std::cin >> word)
+    {     
         unify(word);
-        std::cout << word << std::endl;
         ++word_cnt[word];
+    }
 
    for (const auto& w : word_cnt)
        std::cout << w.first << " occurs " << w.second
-                 << ((w.second > 1) ? " times" : "time") << std::endl;
+                 << ((w.second > 1) ? " times" : " time") << std::endl;
 }

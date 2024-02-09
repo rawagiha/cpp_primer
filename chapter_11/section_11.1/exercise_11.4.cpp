@@ -5,10 +5,18 @@
 
 void unify(std::string& word)
 {
-    for (char& ch : word)
+    for (auto it = word.begin(); it != word.end(); ++it)
     {
-        ch = std::tolower(ch);
+        *it = std::tolower(*it);
+        
+        //std::next does not move iterator, just returns the next value
+        if (std::ispunct(*it) && std::next(it) == word.end() )
+        {
+            word.erase(it, word.end());
+            break;
+        }
     }
+
 }
 
 int main()

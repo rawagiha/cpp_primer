@@ -25,13 +25,14 @@ std::map<std::string, std::string> build_map(std::ifstream& map_file)
 }
 
 const std::string& 
-_transform(const std::string&s, const std::map<std::string, std::string>& m)
+_transform(const std::string& s, std::map<std::string, std::string>& m)
 {
-    auto map_it = m.find(s);
+    const std::string& value = m[s];
 
-    if (map_it != m.cend())
-        return map_it->second;
+    if (!value.empty())
+        return value;
     else
+        m.erase(s);
         return s;
 }
 
@@ -45,7 +46,7 @@ void word_transform(std::ifstream& map_file, std::ifstream& input)
         std::istringstream stream(text);
         
         std::string word;
-        bool is_first = true;
+        bool is_first = false;
         while (stream >> word)
         {
             if (is_first)

@@ -16,10 +16,16 @@ std::map<std::string, std::string> build_map(std::ifstream& map_file)
     while(map_file >> key && std::getline(map_file, value))
     {
         if (value.size() > 1)
-            //trans_map[key] = value.substr(1);
-            trans_map.insert({key, value.substr(1)});
+            trans_map[key] = value.substr(1);
         else
-            throw std::runtime_error("no rule for " + key);
+            try
+            {
+                throw std::runtime_error("no rule for " + key);
+            }
+            catch(std::runtime_error f)
+            {
+                /**/
+            }
     }
 
     return trans_map;

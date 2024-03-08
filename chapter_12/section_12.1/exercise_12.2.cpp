@@ -17,7 +17,9 @@ public:
     void pop_back();
     
     std::string& front();
-    std::string& back(); 
+    const std::string& cfront() const ;
+    std::string& back();
+    const std::string& cback() const; 
 private:
     std::shared_ptr<std::vector<std::string>> data;
 
@@ -41,7 +43,19 @@ std::string& StrBlob::front()
     return data->front();
 }
 
+const std::string& StrBlob::cfront() const
+{
+    check(0, "front on empty StrBlob");
+    return data->front();
+}
+
 std::string& StrBlob::back()
+{
+    check(0, "back on empty StrBlob");
+    return data->back();
+}
+
+const std::string& StrBlob::cback() const
 {
     check(0, "back on empty StrBlob");
     return data->back();
@@ -59,6 +73,7 @@ int main()
     StrBlob b = {"this", "is", "a", "pen"};
     
     b.front() = "that";   
-    std::cout <<  b.front() << std::endl;
+    std::cout <<  b.cfront() << std::endl;
 
+    //b.cfront() = "those";
 }

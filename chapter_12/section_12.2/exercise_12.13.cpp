@@ -18,6 +18,8 @@ int main()
         std::cout << *p;
     std::cout << std::endl;
     
+    delete[] a_b;
+
     const std::string sa("this is");
     const std::string sb(" a pen.");
 

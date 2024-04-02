@@ -9,4 +9,6 @@
 #include <map>
 #include <set>
 
+
+class QueryResult; //forward decl
 #endif

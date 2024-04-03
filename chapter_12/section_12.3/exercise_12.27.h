@@ -11,4 +11,15 @@
 
 
 class QueryResult; //forward decl
+
+class TextQuery {
+public:
+    using LineNo = std::vector<std::string>::size_type;
+    TextQuery(std::ifstream &);
+    QueryResult query(const std::string&) const;
+private:
+    std::shared_ptr<std::vector<std::string>> input;
+    std::map<std::string, std::shared_ptr<std::set<LineNo>>> result;
+};
+
 #endif

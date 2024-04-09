@@ -3,19 +3,21 @@
 #include <algorithm>
 
 
-TextQuery::TextQuery(std::ifstream &ifs) : input(new vector<string>)
+TextQuery::TextQuery(std::ifstream& ifs) : file(new std::vector<std::string>)
 {
-    LineNo lineNo{ 0 };
-    for (string line; std::getline(ifs, line); ++lineNo) {
-        input->push_back(line);
-        std::istringstream line_stream(line);
-        for (string text, word; line_stream >> text; word.clear()) {
-            // avoid read a word followed by punctuation(such as: word, )
-            std::remove_copy_if(text.begin(), text.end(), std::back_inserter(word), ispunct);
-            // use reference avoid count of shared_ptr add.
-            auto &nos = result[word];
-            if (!nos) nos.reset(new std::set<LineNo>);
-            nos->insert(lineNo);
+    std::string text;
+    while (std::getline(is, text)
+    {
+        file->push_back(text);
+        int n = file->size() - 1;
+        std::istringstream line(text);
+        std::string word;
+        while (line >> word)
+        {
+            auto& lines = wm[word] //lines is a shared_ptr
+            if (!lines)
+                lines.reset(new std::set<line_no>);
+            line->insert(n);
         }
     }
 }

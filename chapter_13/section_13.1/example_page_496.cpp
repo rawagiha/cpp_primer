@@ -32,10 +32,12 @@ int main()
 {
     Foo x; //direct init
     
-    x.set_ints(3, 4);
+    //x.set_ints(3, 4);
 
     Foo y = x; //copy initialization 
-    
+    y.set_ints(3, 4);
+    x.show_ints();
+    std::cout << std::endl;
     y.show_ints();
 }
 

@@ -5,6 +5,12 @@
 
 class TreeNode
 {
+public:
+    TreeNode() : value(std::string()), 
+                 count(new int(1)), 
+                 left(nullptr), 
+                 right(nullptr) { }
+
 private:
     std::string value
     int count;

@@ -1,4 +1,5 @@
 #include <string>
+#include <set>
 
 class Folder;
 
@@ -17,4 +18,14 @@ public:
     void remove(Folder&);
 private:
     std::string contents;
+    set::set<Folder*> folders;
+
+    void add_to_Folders(const Message&);
+    void remove_from_Folders();
 };
+
+void Message::save(Folder& f)
+{
+    folders.insert(&f);
+    f.addMsg(this);
+}

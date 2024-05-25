@@ -35,3 +35,9 @@ void Message::remove(Folder& f)
     folders.erase(&f)
     f.remMsg(this);
 }
+
+void Message::add_to_Folder(const Message& m)
+{
+    for (auto f : m.folders)
+        f->addMsg(this)
+}

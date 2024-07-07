@@ -41,3 +41,9 @@ void Message::add_to_Folder(const Message& m)
     for (auto f : m.folders)
         f->addMsg(this)
 }
+
+Message::Message(const Message& m) :
+    contents(m.contents), folders(m.folders)
+{
+    add_to_Folder(m);
+}

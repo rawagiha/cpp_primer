@@ -9,6 +9,7 @@ class Folder;
 class Message
 {
     friend class Folder;
+    friend void swap(Message&, Message&);
 public:
     //explicit??
     //note the default arg
@@ -26,6 +27,8 @@ public:
     
     void save(Folder&);
     void remove(Folder&);
+
+    void show();
 private:
     std::string contents;
     std::set<Folder*> folders;
@@ -34,12 +37,32 @@ private:
     void remove_from_Folders();
 };
 
+void swap(Message&, Message&);
 
 class Folder
 {
-public:    
+    friend class Message;
+    friend void swap(Message&, Message&);
+public:
+    Folder() = default;
+    
+    //copy constructor
+    Folder(const Folder&);
+    
+    //copy assign
+    Folder& operator = (const Folder&);
+
+    //destructor
+    ~Folder();
+
+    void show();
+private:    
     std::set<Message*> messages;
     
+    void add_to_Messages(const Folder&);
+    
+    void remove_from_Messages();
+
     void addMsg(Message*);
     void remMsg(Message*);
 };

@@ -1,5 +1,4 @@
 #include "section_13.5.h"
-#include <iostream>
 
 //static members must be defined in cpp
 std::allocator<std::string> StrVec::alloc;
@@ -40,6 +39,8 @@ void StrVec::free()
 
 StrVec::StrVec(const StrVec& s)
 {
+    std::cout << "copied" << std::endl;
+    
     auto newdata = alloc_n_copy(s.begin(), s.end());
     elements = newdata.first;
     first_free = cap = newdata.second;
@@ -47,15 +48,23 @@ StrVec::StrVec(const StrVec& s)
 
 StrVec::StrVec(std::initializer_list<std::string> lst)
 {
+    std::cout << "created from initializer list" << std::endl;
+    
     auto newdata = alloc_n_copy(lst.begin(), lst.end());
     elements = newdata.first;
     first_free = cap = newdata.second;
 }
 
-StrVec::~StrVec() { free(); }
+StrVec::~StrVec() 
+{ 
+    std::cout << "destroyed" << std::endl;
+    free(); 
+}
 
 StrVec& StrVec::operator = (const StrVec& rhs)
 {
+    std::cout << "copy assigned" << std::endl;
+    
     //allocate & copy elemes somewhere 
     //(different from the originally allcated spece)
     auto data = alloc_n_copy(rhs.begin(), rhs.end());
@@ -68,6 +77,34 @@ StrVec& StrVec::operator = (const StrVec& rhs)
 
     return *this;
 }
+
+StrVec::StrVec(StrVec&& s) noexcept
+    : elements(s.elements), first_free(s.first_free), cap(s.cap)
+{
+    std::cout << "moved" << std::endl;
+
+    s.elements = s.first_free = s.cap = nullptr;
+}
+
+StrVec& StrVec::operator = (StrVec&& rhs) noexcept
+{   
+    std::cout << "move assigned" << std::endl;
+
+    if (this != &rhs)
+    {   
+        /*no allocation happens*/   
+
+        //destroy orig strings and free the allocated space
+        free(); 
+        elements = rhs.elements;
+        first_free = rhs.first_free;
+        cap = rhs.cap;
+
+        //make rhs destructible
+        rhs.elements = rhs.first_free = rhs.cap = nullptr;
+    }
+    return *this;
+} 
 
 void StrVec::reallocate()
 {

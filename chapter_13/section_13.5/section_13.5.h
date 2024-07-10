@@ -5,20 +5,31 @@
 #include <utility>
 #include <memory>
 #include <initializer_list>
+#include <iostream>
 
 class StrVec
 {
 public:
     StrVec():
-        elements(nullptr), first_free(nullptr), cap(nullptr) { }
+        elements(nullptr), first_free(nullptr), cap(nullptr) 
+        { std::cout << "created " << std::endl; }
 
     StrVec(std::initializer_list<std::string>); 
     
     //copy constructor
     StrVec(const StrVec&);
 
+    //copy-assign
     StrVec& operator = (const StrVec&);
+    
+    //destructor
     ~StrVec();
+
+    //move constructor
+    StrVec(StrVec&&) noexcept;
+   
+    //move assign
+    StrVec& operator = (StrVec&&) noexcept;
 
     void push_back(const std::string&);
     void reverse();

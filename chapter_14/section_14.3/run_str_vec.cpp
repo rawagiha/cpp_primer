@@ -67,4 +67,8 @@ int main()
     StrVec sv5 = make_it(std::cin);// copy elision ?? 
 
     show(sv5);
+
+    StrVec sv6 = {"coronae", "borealis", "nova"};
+    
+    std::cout << sv6[1] << " [] " << std::endl; 
 }

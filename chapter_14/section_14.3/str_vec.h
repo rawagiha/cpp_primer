@@ -33,6 +33,20 @@ public:
     //move assign
     StrVec& operator = (StrVec&&) noexcept;
 
+    StrVec& operator = (std::initializer_list<std::string>);
+    
+    //subscripts
+    std::string& operator [] (std::size_t n) 
+    { 
+        return elements[n]; //elements is treated as memory array
+                            //and dereference   
+    }
+    
+    const std::string& operator [] (std::size_t n) const
+    {
+        return elements[n];
+    }
+
     void push_back(const std::string&);
     void reverse();
     

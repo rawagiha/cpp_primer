@@ -38,7 +38,7 @@ int main()
     std::vector<int> numbers(10);
     std::iota(numbers.begin(), numbers.end(), 0);
 
-    //brute force solution
+    //naive brute force solution
     for (int i : numbers)
     {
         for (int j : numbers)

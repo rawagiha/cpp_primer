@@ -6,7 +6,7 @@ int main()
     int n;
     std::cin >> n;
     
-    if (!n)
+    if (!std::cin)
     {
         std::cout << "invalid input" << std::endl;
         return 1;

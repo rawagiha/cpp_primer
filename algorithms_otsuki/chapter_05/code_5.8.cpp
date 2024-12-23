@@ -9,6 +9,18 @@ void choose_smaller(T& a, T b)
 }
 
 
+void show(const std::vector<std::vector<int>>& memo)
+{
+    for (auto col : memo)
+    {
+        for (auto elem : col)
+        {
+            std::cout << elem << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
 int main()
 {
     std::string s, t;
@@ -19,7 +31,8 @@ int main()
     const size_t n = s.size();
     const size_t m = t.size(); 
 
-    std::vector<std::vector<int>> memo(n + 1, std::vector<int>(m + 1, 600));
+    const int INF = 1 << 29;
+    std::vector<std::vector<int>> memo(n + 1, std::vector<int>(m + 1, INF));
     
     memo[0][0] = 0;
 
@@ -38,6 +51,8 @@ int main()
             if (j > 0) choose_smaller(memo[i][j], memo[i][j - 1] + 1);
         }
     } 
+    
+    show(memo);
 
     std::cout << memo[n][m] << std::endl;
 }

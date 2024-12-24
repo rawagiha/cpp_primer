@@ -41,13 +41,13 @@ void to_prev(
         return; 
     }
     
-    if (memo[i][j] == memo[i - 1][j] + 1)
+    if (memo[i][j] == memo[i - 1][j] + 2)
     {
         i -= 1;
         return;
     }
 
-    if (memo[i][j] == memo[i][j - 1] + 1)
+    if (memo[i][j] == memo[i][j - 1] + 2)
     {
         j -= 1;
         return;
@@ -95,9 +95,9 @@ int main()
                  else choose_smaller(memo[i][j], memo[i - 1][j - 1] + 1);
             }
             
-            if (i > 0) choose_smaller(memo[i][j], memo[i - 1][j] + 1);
+            if (i > 0) choose_smaller(memo[i][j], memo[i - 1][j] + 2);
             
-            if (j > 0) choose_smaller(memo[i][j], memo[i][j - 1] + 1);
+            if (j > 0) choose_smaller(memo[i][j], memo[i][j - 1] + 2);
         }
     } 
     

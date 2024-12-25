@@ -106,8 +106,9 @@ void show_alignment(
     size_t n = _s.size();
     size_t m = _t.size();
      
-    const size_t k = (n < m)? n : m;
-
+    const size_t k = moves.size();
+    size_t j = 1;
+    
     std::vector<char> s_aln;
     std::vector<char> t_aln;
 
@@ -115,6 +116,7 @@ void show_alignment(
     {
         s_aln.push_back(_s[1]);
         t_aln.push_back(_t[1]);
+        j = 2;
     }
     else
     {
@@ -123,7 +125,7 @@ void show_alignment(
     }
     
 
-    for (size_t i = 1; i < k + 1; ++i)
+    for (size_t i = j; i < k; ++i)
     {
         if (moves[i - 1][0] == moves[i][0])
         {
@@ -136,7 +138,7 @@ void show_alignment(
     }
 
     
-    for (size_t i = 1; i < k + 1; ++i)
+    for (size_t i = j; i < k; ++i)
     {
         if (moves[i - 1][1] == moves[i][1])
         {

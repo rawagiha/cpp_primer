@@ -95,20 +95,62 @@ void show_alignment(
     const std::string& t
 )
 {
+    const std::string _s = "-" + s;
+    const std::string _t = "-" + t;
+    
     for (auto e : moves)
     {
         std::cout << e[0] << " " << e[1] << std::endl;
     }
     
-    for (auto e : moves)
+    size_t n = _s.size();
+    size_t m = _t.size();
+     
+    const size_t k = (n < m)? n : m;
+
+    std::vector<char> s_aln;
+    std::vector<char> t_aln;
+
+    if (moves[0][0] == 0 && moves[0][1] == 0)
     {
-        std::cout << s[e[0]];
+        s_aln.push_back(_s[1]);
+        t_aln.push_back(_t[1]);
     }
+    else
+    {
+        s_aln.push_back(_s[moves[0][0]]);
+        t_aln.push_back(_t[moves[0][1]]);
+    }
+    
+
+    for (size_t i = 1; i < k + 1; ++i)
+    {
+        if (moves[i - 1][0] == moves[i][0])
+        {
+            s_aln.push_back('-');
+        }
+        else
+        {
+            s_aln.push_back(_s[moves[i][0]]);
+        }
+    }
+
+    
+    for (size_t i = 1; i < k + 1; ++i)
+    {
+        if (moves[i - 1][1] == moves[i][1])
+        {
+            t_aln.push_back('-');
+        }
+        else
+        {
+            t_aln.push_back(_t[moves[i][1]]);
+        }
+    }
+
+    for (auto e : s_aln) std::cout << e;
     std::cout << std::endl;
-    for (auto e : moves)
-    {
-        std::cout << t[e[1]];
-    }
+    for (auto e : t_aln) std::cout << e;
     std::cout << std::endl;
 }
 

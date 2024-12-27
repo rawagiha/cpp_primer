@@ -103,10 +103,8 @@ void show_alignment(
         std::cout << e[0] << " " << e[1] << std::endl;
     }
     
-    size_t n = _s.size();
-    size_t m = _t.size();
-     
     const size_t k = moves.size();
+    
     size_t j = 1;
     
     std::vector<char> s_aln;
@@ -116,14 +114,24 @@ void show_alignment(
     {
         s_aln.push_back(_s[1]);
         t_aln.push_back(_t[1]);
-        j = 2;
+        ++j;
     }
-    else
+    else if (moves[0][0] == 0)
     {
-        s_aln.push_back(_s[moves[0][0]]);
-        t_aln.push_back(_t[moves[0][1]]);
+        for (size_t i = 1; i <= moves[0][1]; ++i)
+        {
+            s_aln.push_back('-');
+            t_aln.push_back(_t[i]);
+        }
     }
-    
+    else if (moves[0][1] == 0)
+    {
+        for (size_t i = 1; i <= moves[0][0]; ++i)
+        {
+            s_aln.push_back(_s[i]);
+            t_aln.push_back('-');
+        }
+    }
 
     for (size_t i = j; i < k; ++i)
     {

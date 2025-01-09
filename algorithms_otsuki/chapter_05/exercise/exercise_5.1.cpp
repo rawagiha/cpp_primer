@@ -3,6 +3,7 @@
 #include <random>
 #include <algorithm>
 
+
 std::random_device engine;
 std::uniform_int_distribution<int> dist {1, 20};
 
@@ -57,6 +58,7 @@ int main()
     
     int total_happniness = happiness[0][i];
 
+    //wrong logic...
     for (size_t n = 1; n < N; ++n)
     {
         i = get_larger(happiness[n], i);

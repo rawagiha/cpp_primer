@@ -10,7 +10,6 @@ struct Node
     // no dynamic allocation
     Node(std::string name_ = "") : next(nullptr), name(name_) { } 
 
-    
     // destructor not needed as no dynamic allocation
     // this is to print the deallocation 
     ~Node() 
@@ -19,19 +18,17 @@ struct Node
     }
 };
 
-Node* nil = nullptr;
-
 //initialization
-//pointing to self
-void init()
+Node* init()
 {
-    nil = new Node();
+    Node* nil = new Node();
     nil->next = nil;
-
+    
+    return nil;
     //nil will outlive!
 }
 
-void show()
+void show(Node*&  nil)
 {
     Node* curr = nil->next;
 
@@ -40,7 +37,6 @@ void show()
 
     std::cout << std::endl;
 }
-
 
 void clear(Node*& nil) 
 {
@@ -59,11 +55,11 @@ void clear(Node*& nil)
     }
     
     delete curr;
-    nil = nullptr; // Reset head to nullptr after deallocation
+    nil = nullptr; // set to NUll to avoid dandling
 }
 
 //insert v after p
-void insert(Node* v, Node* p=nil)
+void insert(Node* v, Node* p)
 {
     v->next = p->next;
     p->next = v;
@@ -78,13 +74,13 @@ int main()
                                       "suzuki",
                                       "sato"};
 
-    init();
+    Node* nil = init();
     
     for (size_t i = 0; i < names.size(); ++i)
     {
         Node* node = new Node(names[i]);
 
-        insert(node);
+        insert(node, nil);
 
         if (i == 2)
         {
@@ -93,8 +89,10 @@ int main()
         }
 
         std::cout <<"step " << i << ": ";
-        show();
+        show(nil);
     }
     
     clear(nil);
+
+    std::cout << nil << std::endl;
 }

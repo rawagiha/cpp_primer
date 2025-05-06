@@ -9,18 +9,22 @@ struct Node
     std::string name;
 
     Node(std::string name_="") : prev(nullptr), next(nullptr), name(name_) { }
+
+    ~Node() 
+    {
+        std::cout << name << " deleted" << std::endl;
+    }
 };
 
-Node* nil;
-
-void init()
+Node* init()
 {
-    nil = new Node();
+    Node* nil = new Node();
     nil->prev = nil;
     nil->next = nil;
+    return nil;
 }
 
-void show()
+void show(Node* nil)
 {
     Node* curr = nil->next;
     for (; curr != nil; curr = curr->next)
@@ -31,7 +35,7 @@ void show()
     std::cout << std::endl;
 }
 
-void insert(Node* v, Node* p=nil)
+void insert(Node* v, Node* p)
 {
     v->next = p->next;
     v->prev = p;
@@ -41,17 +45,32 @@ void insert(Node* v, Node* p=nil)
 
 void erase(Node* v)
 {
-    if (v == nil) return;
-    
     v->prev->next = v->next;
     v->next->prev = v->prev;
 
     delete v;
 }
 
+void clear(Node*& nil)
+{
+    Node* curr = nil->next;
+    Node* temp = nullptr;
+    
+    while (curr != nil)
+    {
+        temp = curr;
+        curr = curr->next;
+        erase(temp);
+    }
+
+    delete nil;
+    nil = nullptr;
+}
+
+
 int main()
 {
-    init();
+    Node* nil = init();
 
     std::vector<std::string> names = {"yamamoto",
                                       "watanabe",
@@ -66,7 +85,7 @@ int main()
     {
         Node* node = new Node(names[i]);
 
-        insert(node);
+        insert(node, nil);
 
         if (i == 3)
         {
@@ -79,10 +98,12 @@ int main()
 
 
     std::cout << "before: ";
-    show();
+    show(nil);
 
     erase(watanabe);
 
     std::cout << "after: ";
-    show(); 
+    show(nil); 
+
+    clear(nil);
 }

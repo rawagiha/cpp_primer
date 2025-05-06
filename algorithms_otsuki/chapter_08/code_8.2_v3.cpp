@@ -55,7 +55,7 @@ void clear(Node*& nil)
     }
     
     delete curr;
-    nil = nullptr; // set to NUll to avoid dandling
+    nil = nullptr; // set to NUll to avoid dangling
 }
 
 //insert v after p

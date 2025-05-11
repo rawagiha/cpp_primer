@@ -44,7 +44,7 @@ int pop()
     return st[top];
 }
 
-void show(int st_[], int top_)
+void show(const int st_[], int top_)
 {
     for (int i = 0; i < top_; ++i)
     {
@@ -65,8 +65,8 @@ int main()
     push(9);
 
     pop();
-    pop();
     show(st, top);
+    pop();
     pop();
     pop();
 }

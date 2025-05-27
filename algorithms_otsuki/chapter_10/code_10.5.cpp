@@ -25,6 +25,22 @@ struct Heap
         }
         heap[i] = x;
     }
+
+    int top()
+    {
+        if (!heap.empty()) return heap[0];
+        else return -1;
+    }
+
+    void pop()
+    {
+        if (heap.empty()) return;
+        
+        int x = heap.back();
+        heap.pop_back(); //remove last elem
+
+
+    }
 };
 
 void show(const Heap& h)
@@ -50,4 +66,6 @@ int main()
     h.push(6); h.push(19); h.push(23);
     
     show(h); 
+
+    std::cout << h.top() << std::endl;
 }
